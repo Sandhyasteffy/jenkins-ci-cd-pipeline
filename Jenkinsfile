@@ -4,33 +4,32 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main',
-                    url: 'https://github.com/Sandhyasteffy/jenkins-ci-cd-pipeline.git'
+                echo 'Source code checked out from GitHub'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                bat 'npm install'
             }
         }
 
         stage('Test') {
             steps {
-                sh 'npm test'
+                bat 'npm test'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t jenkins-ci-cd-pipeline:latest .'
+                bat 'docker build -t jenkins-ci-cd-pipeline:latest .'
             }
         }
 
         stage('Deploy') {
             steps {
-                sh 'docker rm -f jenkins-ci-cd-app || true'
-                sh 'docker run -d --name jenkins-ci-cd-app -p 3000:3000 --restart unless-stopped jenkins-ci-cd-pipeline:latest'
+                bat 'docker rm -f jenkins-ci-cd-app || exit /b 0'
+                bat 'docker run -d --name jenkins-ci-cd-app -p 3000:3000 --restart unless-stopped jenkins-ci-cd-pipeline:latest'
             }
         }
     }
