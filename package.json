@@ -1,0 +1,13 @@
+{
+  "name": "jenkins-ci-cd-pipeline",
+  "version": "1.0.0",
+  "description": "DevOps Task 2 Jenkins CI/CD pipeline with Docker",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
